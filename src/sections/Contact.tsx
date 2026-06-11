@@ -72,14 +72,6 @@ export default function Contact() {
           </p>
         )}
 
-        <div className="mt-16 text-gray-500 text-xs flex flex-col gap-1">
-          <p className="transition-colors duration-300 hover:text-primary">
-            Rahul Bhosale — Vaibhav Gupta
-          </p>
-          <p className="transition-colors duration-300 hover:text-primary">
-            IIMA AI Summer Residency 2026
-          </p>
-        </div>
       </div>
     </section>
   )
