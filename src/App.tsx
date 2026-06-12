@@ -3,6 +3,7 @@ import Problem from './sections/Problem'
 import HowItWorks from './sections/HowItWorks'
 import WhyNow from './sections/WhyNow'
 import Contact from './sections/Contact'
+import Footer from './sections/Footer'
 import { ScrollProgress } from './components/ScrollProgress'
 import { Cursor } from './components/Cursor'
 import { useAnimatedFavicon } from './hooks/useAnimatedFavicon'
@@ -31,6 +32,7 @@ export default function App() {
       <WhyNow />
       <Divider />
       <Contact />
+      <Footer />
     </main>
   )
 }
