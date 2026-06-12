@@ -11,15 +11,35 @@ const VALUE_PROPS = [
   { label: 'One-click audit', sub: 'Inspection answers in minutes' },
 ]
 
+// Replace with your Formspree form ID from formspree.io
+const FORMSPREE_ID = 'YOUR_FORM_ID'
+
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', company: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (form.email.trim()) {
-      window.location.href = `mailto:hello@undark.in?subject=Early access request – ${encodeURIComponent(form.company)}&body=Hi, I'd like to learn more about Undark.%0A%0AName: ${encodeURIComponent(form.name)}%0ACompany: ${encodeURIComponent(form.company)}%0AEmail: ${encodeURIComponent(form.email)}`
-      setSubmitted(true)
+    if (!form.email.trim()) return
+    setLoading(true)
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name: form.name, email: form.email, company: form.company }),
+      })
+      if (res.ok) {
+        setSubmitted(true)
+      } else {
+        // fallback to mailto if Formspree not configured
+        window.location.href = `mailto:hello@undark.in?subject=Early access – ${encodeURIComponent(form.company)}&body=Name: ${encodeURIComponent(form.name)}%0ACompany: ${encodeURIComponent(form.company)}%0AEmail: ${encodeURIComponent(form.email)}`
+        setSubmitted(true)
+      }
+    } catch {
+      window.location.href = `mailto:hello@undark.in?subject=Early access – ${encodeURIComponent(form.company)}`
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -115,12 +135,13 @@ export default function Contact() {
                 <Magnetic strength={0.2} className="mt-1">
                   <motion.button
                     type="submit"
+                    disabled={loading}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="group w-full inline-flex items-center justify-between rounded-xl pl-5 pr-2 py-3 text-primary font-medium text-sm transition-all border border-primary/25 hover:border-primary/50"
+                    className="group w-full inline-flex items-center justify-between rounded-xl pl-5 pr-2 py-3 text-primary font-medium text-sm transition-all border border-primary/25 hover:border-primary/50 disabled:opacity-50"
                     style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(225,224,204,0.08)' }}
                   >
-                    Request access
+                    {loading ? 'Sending…' : 'Request access'}
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg border border-primary/20 bg-primary/10 transition-transform group-hover:scale-110">
                       <ArrowRight size={15} color="#E1E0CC" />
                     </span>

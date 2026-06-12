@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, Menu, X } from 'lucide-react'
 import { AnimatedLogoLockup } from '../components/AnimatedLogo'
 import { Magnetic } from '../components/Magnetic'
 import { WordsPullUp } from '../components/TextAnimations'
@@ -14,9 +15,11 @@ const NAV_ITEMS = [
 ]
 
 export default function Hero() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <section className="h-screen p-4 md:p-6">
-      {/* fixed nav — outside overflow-hidden card so it persists on scroll */}
+      {/* fixed nav */}
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
         <motion.div
           className="nav-shimmer-border rounded-2xl md:rounded-3xl p-[1px]"
@@ -32,30 +35,60 @@ export default function Hero() {
           <a href="#" aria-label="Undark home" className="shrink-0">
             <AnimatedLogoLockup height={29} />
           </a>
-          <div className="flex items-center gap-3 sm:gap-6 md:gap-10 lg:gap-12">
+
+          {/* desktop links */}
+          <div className="hidden sm:flex items-center gap-3 sm:gap-6 md:gap-10 lg:gap-12">
             {NAV_ITEMS.map((item) => (
               item.label === 'Talk to us' ? (
-                <a
-                  key={item.label}
-                  href={item.href}
+                <a key={item.label} href={item.href}
                   className="nav-link text-[11px] sm:text-xs whitespace-nowrap border border-primary/25 hover:border-primary/50 rounded-full px-3 py-1 opacity-80 hover:opacity-100 transition-all duration-200"
-                  style={{ backdropFilter: 'blur(8px)', backgroundColor: 'rgba(225,224,204,0.07)' }}
-                >
+                  style={{ backdropFilter: 'blur(8px)', backgroundColor: 'rgba(225,224,204,0.07)' }}>
                   {item.label}
                 </a>
               ) : (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="nav-link text-[11px] sm:text-xs whitespace-nowrap opacity-75 hover:opacity-100 transition-opacity duration-200"
-                >
+                <a key={item.label} href={item.href}
+                  className="nav-link text-[11px] sm:text-xs whitespace-nowrap opacity-75 hover:opacity-100 transition-opacity duration-200">
                   {item.label}
                 </a>
               )
             ))}
           </div>
+
+          {/* mobile hamburger */}
+          <button
+            className="sm:hidden text-primary/70 hover:text-primary transition-colors ml-2"
+            onClick={() => setMenuOpen(v => !v)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
         </motion.div>
+
+        {/* mobile dropdown */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              className="sm:hidden mt-2 rounded-2xl overflow-hidden border border-white/[0.1]"
+              style={{ backdropFilter: 'saturate(180%) blur(20px)', backgroundColor: 'rgba(0,0,0,0.9)' }}
+              initial={{ opacity: 0, y: -8, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.97 }}
+              transition={{ duration: 0.2 }}
+            >
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center px-5 py-3.5 text-sm text-primary/75 hover:text-primary hover:bg-white/[0.04] transition-all border-b border-white/[0.05] last:border-0"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <div className="relative h-full w-full rounded-2xl md:rounded-[2rem] overflow-hidden">
