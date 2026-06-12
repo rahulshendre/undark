@@ -41,7 +41,7 @@ export default function Hero() {
             {NAV_ITEMS.map((item) => (
               item.label === 'Talk to us' ? (
                 <a key={item.label} href={item.href}
-                  className="nav-link text-[11px] sm:text-xs whitespace-nowrap border border-primary/25 hover:border-primary/50 rounded-full px-3 py-1 opacity-80 hover:opacity-100 transition-all duration-200"
+                  className="text-[11px] sm:text-xs whitespace-nowrap border border-primary/25 hover:border-primary/50 rounded-full px-3 py-1 text-primary/80 hover:text-primary opacity-80 hover:opacity-100 transition-all duration-200"
                   style={{ backdropFilter: 'blur(8px)', backgroundColor: 'rgba(225,224,204,0.07)' }}>
                   {item.label}
                 </a>
