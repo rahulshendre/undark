@@ -71,6 +71,13 @@ function Card({
             'radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(225, 224, 204, 0.07), transparent 70%)',
         }}
       />
+      {/* watermark number */}
+      <div
+        className="pointer-events-none absolute -right-3 -bottom-5 text-[9rem] font-bold leading-none select-none text-white/[0.04] group-hover/card:text-white/[0.07] transition-colors duration-500"
+        aria-hidden
+      >
+        {card.number}
+      </div>
       <Icon
         className="text-primary mb-6 transition-transform duration-300 group-hover/card:scale-110 group-hover/card:-rotate-6"
         size={24}

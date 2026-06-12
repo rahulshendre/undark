@@ -41,7 +41,10 @@ export default function Contact() {
           transition={{ duration: 0.8, ease: EASE }}
           onSubmit={(e) => {
             e.preventDefault()
-            if (email.trim()) setSubmitted(true)
+            if (email.trim()) {
+              window.location.href = `mailto:hello@undark.in?subject=Early access request&body=Hi, I'd like to learn more about Undark. My email is ${encodeURIComponent(email)}.`
+              setSubmitted(true)
+            }
           }}
         >
           <input
@@ -50,17 +53,19 @@ export default function Contact() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
-            className="flex-1 w-full bg-transparent border border-primary/30 rounded-full px-5 py-3 text-sm text-primary placeholder:text-gray-500 focus:outline-none focus:border-primary/70 focus:shadow-[0_0_0_3px_rgba(222,219,200,0.1)] transition-all duration-300"
+            className="flex-1 w-full border border-white/[0.12] rounded-full px-5 py-3 text-sm text-primary placeholder:text-gray-500 focus:outline-none focus:border-white/30 focus:shadow-[0_0_0_3px_rgba(222,219,200,0.08)] transition-all duration-300"
+            style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(255,255,255,0.04)' }}
           />
           <Magnetic strength={0.25} className="shrink-0">
             <motion.button
               type="submit"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="group inline-flex items-center gap-2 hover:gap-3 bg-primary rounded-full pl-5 pr-2 py-2 text-black font-medium text-sm sm:text-base shrink-0 transition-all"
+              className="group inline-flex items-center gap-2 hover:gap-3 rounded-full pl-5 pr-2 py-2 text-primary font-medium text-sm sm:text-base shrink-0 transition-all border border-primary/25 hover:border-primary/50 hover:bg-primary/10"
+              style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(225,224,204,0.08)' }}
             >
               Request access
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-black transition-transform group-hover:scale-110">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full border border-primary/20 bg-primary/10 transition-transform group-hover:scale-110">
                 <ArrowRight size={16} color="#E1E0CC" />
               </span>
             </motion.button>
@@ -71,6 +76,13 @@ export default function Contact() {
             Thanks — we'll be in touch.
           </p>
         )}
+
+        <p className="text-gray-600 text-xs mt-6">
+          or reach us directly at{' '}
+          <a href="mailto:hello@undark.in" className="text-primary/50 hover:text-primary/80 transition-colors duration-200">
+            hello@undark.in
+          </a>
+        </p>
 
       </div>
     </section>

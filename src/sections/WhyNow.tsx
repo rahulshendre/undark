@@ -32,13 +32,15 @@ export default function WhyNow() {
           {CARDS.map((card, i) => (
             <motion.div
               key={card.title}
-              className="bg-[#101010] rounded-2xl p-6 border border-transparent hover:border-primary/15 transition-colors"
+              className="relative overflow-hidden rounded-2xl p-6 border border-white/[0.08] hover:border-white/[0.15] transition-colors"
+              style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(255,255,255,0.03)' }}
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               whileHover={{ y: -4 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
             >
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
               <h3 className="text-primary font-medium mb-3">{card.title}</h3>
               <p className="text-gray-400 text-sm leading-relaxed">
                 {card.body}

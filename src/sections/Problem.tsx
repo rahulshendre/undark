@@ -1,20 +1,57 @@
-import { motion } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
 import {
   WordsPullUpMultiStyle,
   AnimatedParagraph,
 } from '../components/TextAnimations'
 
+function CountUp({ to, duration = 1.8, prefix = '', suffix = '', separator = true }: {
+  to: number
+  duration?: number
+  prefix?: string
+  suffix?: string
+  separator?: boolean
+}) {
+  const [val, setVal] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+
+  useEffect(() => {
+    if (!inView) return
+    const start = performance.now()
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / (duration * 1000), 1)
+      const eased = 1 - Math.pow(1 - progress, 4)
+      setVal(Math.round(eased * to))
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [inView, to, duration])
+
+  const formatted = separator ? val.toLocaleString('en-IN') : val
+
+  return <span ref={ref}>{prefix}{formatted}{suffix}</span>
+}
+
 const STATS = [
   {
-    value: 'Rs.4,000-5,000 Cr',
+    render: () => (
+      <>
+        Rs.<CountUp to={4000} />-<CountUp to={5000} /> Cr
+      </>
+    ),
     label: 'written off annually in sub-Rs.1L unsecured loans',
   },
   {
-    value: '16%',
+    render: () => <><CountUp to={16} separator={false} />%</>,
     label: 'MFI gross NPA as of March 2025',
   },
   {
-    value: 'Rs.480-850',
+    render: () => (
+      <>
+        Rs.<CountUp to={480} separator={false} />-<CountUp to={850} separator={false} />
+      </>
+    ),
     label: 'cost per field visit vs Rs.10K loan value',
   },
 ]
@@ -43,14 +80,16 @@ export default function Problem() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4 mt-14 md:mt-20 max-w-4xl mx-auto">
           {STATS.map((stat, i) => (
             <motion.div
-              key={stat.value}
+              key={i}
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               whileHover={{ y: -4 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
             >
-              <p className="text-primary text-4xl font-bold">{stat.value}</p>
+              <p className="text-primary text-4xl font-bold tabular-nums">
+                {stat.render()}
+              </p>
               <p className="text-gray-400 text-sm mt-2">{stat.label}</p>
             </motion.div>
           ))}
