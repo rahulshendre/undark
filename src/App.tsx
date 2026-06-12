@@ -6,7 +6,6 @@ import WhyNow from './sections/WhyNow'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 import { ScrollProgress } from './components/ScrollProgress'
-import { Cursor } from './components/Cursor'
 import { StatsTicker } from './components/StatsTicker'
 import { useAnimatedFavicon } from './hooks/useAnimatedFavicon'
 
@@ -22,8 +21,7 @@ export default function App() {
   useAnimatedFavicon()
 
   return (
-    <main className="bg-black min-h-screen [&_*]:cursor-none cursor-none">
-      <Cursor />
+    <main className="bg-black min-h-screen">
       <ScrollProgress />
       <Hero />
       <StatsTicker />
