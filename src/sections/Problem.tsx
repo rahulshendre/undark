@@ -35,31 +35,24 @@ function CountUp({ to, duration = 1.8, prefix = '', suffix = '', separator = tru
 
 const STATS = [
   {
-    render: () => (
-      <>
-        Rs.<CountUp to={4000} />-<CountUp to={5000} /> Cr
-      </>
-    ),
-    label: 'written off annually in sub-Rs.1L unsecured loans',
+    render: () => <><CountUp to={62} separator={false} /></>,
+    label: 'NBFCs penalised 2023–25 for outsourced-agent conduct failures',
   },
   {
-    render: () => <><CountUp to={16} separator={false} />%</>,
-    label: 'MFI gross NPA as of March 2025',
+    render: () => <><CountUp to={103} separator={false} />%</>,
+    label: 'frontline recovery-agent attrition — credentials re-verified from scratch every job change',
   },
   {
-    render: () => (
-      <>
-        Rs.<CountUp to={480} separator={false} />-<CountUp to={850} separator={false} />
-      </>
-    ),
-    label: 'cost per field visit vs Rs.10K loan value',
+    render: () => <>4,<CountUp to={600} separator={false} />+</>,
+    label: 'agents for one NBFC across 100+ agencies, with no proof of visits on file',
   },
 ]
 
 export default function Problem() {
   return (
     <section id="problem" className="bg-black px-4 md:px-6 py-16 md:py-24">
-      <div className="bg-[#101010] rounded-2xl md:rounded-[2rem] max-w-6xl mx-auto text-center px-6 py-16 md:px-12 md:py-24">
+      <div className="relative overflow-hidden rounded-2xl md:rounded-[2rem] max-w-6xl mx-auto text-center px-6 py-16 md:px-12 md:py-24 border border-white/[0.07]" style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
         <p className="text-primary text-[10px] sm:text-xs mb-8 tracking-widest uppercase">
           The problem
         </p>
@@ -68,12 +61,8 @@ export default function Problem() {
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-3xl mx-auto leading-[0.95] sm:leading-[0.9]"
           style={{ color: '#E1E0CC' }}
           segments={[
-            { text: "Sub-Rs.1L loans don't get recovered.", className: 'font-normal' },
-            { text: 'They get written off.', className: 'italic font-serif' },
-            {
-              text: 'Rs.4,000-5,000 crore every year, quietly.',
-              className: 'font-normal',
-            },
+            { text: "An agent's legal right to work is a stack of credentials.", className: 'font-normal' },
+            { text: 'Today that entire stack is paper.', className: 'italic font-serif' },
           ]}
         />
 
@@ -98,7 +87,7 @@ export default function Problem() {
         <AnimatedParagraph
           className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-14 md:mt-20"
           style={{ color: '#DEDBC8' }}
-          text="When a borrower stops paying on a Rs.10,000 loan, the lender has no good option. Sending a field agent costs more than the loan is worth. Digital channels fail once a borrower goes silent. So the loan gets written off. No funded technology company is solving this specifically."
+          text="Every recovery agent must hold IIBF DRA certification — sole certifier, RBI mandate. The lender is liable for every agent's conduct: Rs.2.5 Cr penalty on Bajaj Finance (2021), Rs.1.86 Cr on CSB Bank (2024). RBI's draft directions add per-contact duties by Oct 2026: recorded calls, identity disclosure, authorization letters on every visit. Yet certificates sit in drawers, authorizations travel as WhatsApp forwards, and borrowers cannot verify who is at their door."
         />
       </div>
     </section>

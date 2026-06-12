@@ -19,27 +19,42 @@ export default function Hero() {
       {/* fixed nav — outside overflow-hidden card so it persists on scroll */}
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
         <motion.div
-          className="relative flex items-center rounded-2xl md:rounded-3xl px-5 py-3.5 md:px-10 gap-3 sm:gap-7 md:gap-12 lg:gap-14 overflow-hidden border border-white/[0.12]"
-          style={{ backdropFilter: 'saturate(180%) blur(20px)', backgroundColor: 'rgba(0,0,0,0.62)' }}
+          className="nav-shimmer-border rounded-2xl md:rounded-3xl p-[1px]"
           initial={{ y: -80 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
         >
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" />
+        <div
+          className="relative flex items-center rounded-2xl md:rounded-3xl px-5 py-3.5 md:px-10 gap-3 sm:gap-7 md:gap-12 lg:gap-14 overflow-hidden"
+          style={{ backdropFilter: 'saturate(180%) blur(20px)', backgroundColor: 'rgba(0,0,0,0.65)' }}
+        >
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
           <a href="#" aria-label="Undark home" className="shrink-0">
             <AnimatedLogoLockup height={29} />
           </a>
           <div className="flex items-center gap-3 sm:gap-6 md:gap-10 lg:gap-12">
             {NAV_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="nav-link text-[11px] sm:text-xs whitespace-nowrap opacity-75 hover:opacity-100 transition-opacity duration-200"
-              >
-                {item.label}
-              </a>
+              item.label === 'Talk to us' ? (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="nav-link text-[11px] sm:text-xs whitespace-nowrap border border-primary/25 hover:border-primary/50 rounded-full px-3 py-1 opacity-80 hover:opacity-100 transition-all duration-200"
+                  style={{ backdropFilter: 'blur(8px)', backgroundColor: 'rgba(225,224,204,0.07)' }}
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="nav-link text-[11px] sm:text-xs whitespace-nowrap opacity-75 hover:opacity-100 transition-opacity duration-200"
+                >
+                  {item.label}
+                </a>
+              )
             ))}
           </div>
+        </div>
         </motion.div>
       </nav>
 
@@ -90,9 +105,7 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8, ease: EASE }}
               >
-                AI recovery infrastructure for sub-Rs.1L loans. We make
-                small-ticket debt recovery economically viable for NBFCs and
-                MFIs.
+                The work-authorization rail for debt recovery. Every agent verified, every contact provable. Lender compliance, automatic.
               </motion.p>
               <motion.div
                 className="w-fit"

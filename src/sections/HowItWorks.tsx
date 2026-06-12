@@ -1,40 +1,40 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, Check, Gauge, MapPin, Phone } from 'lucide-react'
+import { ArrowRight, Check, IdCard, ShieldCheck, QrCode } from 'lucide-react'
 import { WordsPullUpMultiStyle } from '../components/TextAnimations'
 
 const CARDS = [
   {
     number: '01',
-    title: 'Intent scoring.',
-    icon: Gauge,
+    title: 'Agent Passport.',
+    icon: IdCard,
     items: [
-      'Analyses every prior borrower signal',
-      'IVR responses, call patterns, payment timing',
-      'Outputs a recovery probability score',
-      'Routes each account to the right channel',
+      'Live DRA certification status — sole certifier, RBI mandate',
+      'Background verification and agency empanelment on one credential',
+      'Assignment inbox replaces the paper authorization letter',
+      'Portable conduct history across employers — defense against false allegations',
     ],
   },
   {
     number: '02',
-    title: 'AI voice outreach.',
-    icon: Phone,
+    title: 'Compliant Contact Mode.',
+    icon: ShieldCheck,
     items: [
-      "Calls in borrower's language — Hindi, Hinglish, Tamil, Marathi",
-      'Full context of every prior interaction',
-      'Rs.12-25 per resolved contact vs Rs.480-850 field visit',
-      '8-10 attempts on a Rs.10K loan costs Rs.100-200 total',
+      'Enforces 8am–7pm hours, identity disclosure, and recording automatically',
+      'Cross-vendor contact frequency caps per account',
+      'One tamper-evident, account-level trail per lender',
+      'Indian-language screening for coercive conduct',
     ],
   },
   {
     number: '03',
-    title: 'Surgical field dispatch.',
-    icon: MapPin,
+    title: 'Borrower Verification.',
+    icon: QrCode,
     items: [
-      'Only sends agents to accounts that need a visit',
-      'Agent knows when to go, what to say, what worked before',
-      'Converts blind visits into targeted ones',
-      'Every outcome feeds back into the model',
+      'Borrower scans agent QR — no app, no data collected',
+      'Confirms: certified, authorized by this lender, valid today',
+      'Real-time protection against fake and unauthorized agents',
+      'Works offline — tamper-evident QR per assignment',
     ],
   },
 ]
@@ -53,7 +53,8 @@ function Card({
   return (
     <motion.div
       ref={ref}
-      className="group/card relative overflow-hidden bg-[#212121] rounded-2xl p-6 md:p-8 flex flex-col border border-transparent hover:border-primary/20 transition-colors"
+      className="group/card relative overflow-hidden rounded-2xl p-6 md:p-8 flex flex-col border border-white/[0.08] hover:border-white/[0.15] transition-colors"
+      style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(255,255,255,0.03)' }}
       initial={{ scale: 0.95, opacity: 0 }}
       animate={isInView ? { scale: 1, opacity: 1 } : {}}
       whileHover={{ y: -6 }}
@@ -140,11 +141,11 @@ export default function HowItWorks() {
           className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-12 md:mb-20"
           segments={[
             {
-              text: "Three things. That's it. ",
+              text: 'A three-sided network. ',
               className: 'text-primary block',
             },
             {
-              text: 'No new dialers. No ripping out what works.',
+              text: 'Agents carry it. Borrowers verify against it. Lenders pay for it.',
               className: 'text-gray-500 block',
             },
           ]}

@@ -1,90 +1,140 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { AnimatedLogoMark } from '../components/AnimatedLogo'
 import { Magnetic } from '../components/Magnetic'
-import { WordsPullUp } from '../components/TextAnimations'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
+const VALUE_PROPS = [
+  { label: 'Pilot partner', sub: 'First 3–5 lenders only' },
+  { label: 'Agent side free', sub: 'Network compounds on its own' },
+  { label: 'One-click audit', sub: 'Inspection answers in minutes' },
+]
+
 export default function Contact() {
-  const [email, setEmail] = useState('')
+  const [form, setForm] = useState({ name: '', email: '', company: '' })
   const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (form.email.trim()) {
+      window.location.href = `mailto:hello@undark.in?subject=Early access request – ${encodeURIComponent(form.company)}&body=Hi, I'd like to learn more about Undark.%0A%0AName: ${encodeURIComponent(form.name)}%0ACompany: ${encodeURIComponent(form.company)}%0AEmail: ${encodeURIComponent(form.email)}`
+      setSubmitted(true)
+    }
+  }
+
+  const inputClass = "w-full rounded-xl px-4 py-3 text-sm text-primary placeholder:text-gray-600 focus:outline-none focus:border-white/25 transition-all duration-200 border border-white/[0.1]"
+  const inputStyle = { backdropFilter: 'blur(8px)', backgroundColor: 'rgba(255,255,255,0.04)' }
 
   return (
     <section id="contact" className="bg-black px-4 md:px-6 py-20 md:py-32">
-      <div className="max-w-2xl mx-auto text-center flex flex-col items-center">
-        <motion.div
-          className="mb-10"
-          whileHover={{ rotate: 180, scale: 1.05 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <AnimatedLogoMark size={80} />
-        </motion.div>
+      <motion.div
+        className="nav-shimmer-border rounded-2xl md:rounded-3xl p-[1px] max-w-5xl mx-auto"
+        initial={{ y: 30, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: EASE }}
+      >
+      <div
+        className="relative overflow-hidden rounded-2xl md:rounded-3xl"
+        style={{ backgroundColor: 'rgba(14,14,14,0.95)' }}
+      >
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent pointer-events-none" />
 
-        <WordsPullUp
-          text="We are onboarding our first three NBFC partners."
-          className="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight"
-          style={{ color: '#E1E0CC' }}
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+          {/* Left */}
+          <div className="p-8 md:p-12 flex flex-col justify-between gap-10 lg:border-r border-white/[0.06]">
+            <div>
+              <p className="text-primary/50 text-[10px] tracking-widest uppercase mb-5">Get in touch</p>
+              <h2 className="text-primary text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
+                Pilot the rail with one lender's agencies.
+              </h2>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                If you run compliance or collections at an RBI-regulated lender and agent-conduct liability is a live problem, we want to talk. Via IIMA Ventures network.
+              </p>
+            </div>
 
-        <p className="text-primary/70 text-sm md:text-base max-w-xl mx-auto mt-6">
-          If you run collections for an NBFC or MFI and sub-Rs.1L write-offs
-          are a real problem for you, we want to talk.
-        </p>
+            <div className="grid grid-cols-3 gap-2">
+              {VALUE_PROPS.map((vp) => (
+                <div
+                  key={vp.label}
+                  className="rounded-xl p-3 border border-white/[0.07]"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}
+                >
+                  <p className="text-primary text-xs font-medium">{vp.label}</p>
+                  <p className="text-gray-600 text-[11px] mt-0.5 leading-tight">{vp.sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <motion.form
-          className="flex flex-col sm:flex-row items-center gap-3 mt-10 w-full max-w-md"
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: EASE }}
-          onSubmit={(e) => {
-            e.preventDefault()
-            if (email.trim()) {
-              window.location.href = `mailto:hello@undark.in?subject=Early access request&body=Hi, I'd like to learn more about Undark. My email is ${encodeURIComponent(email)}.`
-              setSubmitted(true)
-            }
-          }}
-        >
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-            className="flex-1 w-full border border-white/[0.12] rounded-full px-5 py-3 text-sm text-primary placeholder:text-gray-500 focus:outline-none focus:border-white/30 focus:shadow-[0_0_0_3px_rgba(222,219,200,0.08)] transition-all duration-300"
-            style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(255,255,255,0.04)' }}
-          />
-          <Magnetic strength={0.25} className="shrink-0">
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="group inline-flex items-center gap-2 hover:gap-3 rounded-full pl-5 pr-2 py-2 text-primary font-medium text-sm sm:text-base shrink-0 transition-all border border-primary/25 hover:border-primary/50 hover:bg-primary/10"
-              style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(225,224,204,0.08)' }}
-            >
-              Request access
-              <span className="flex items-center justify-center w-8 h-8 rounded-full border border-primary/20 bg-primary/10 transition-transform group-hover:scale-110">
-                <ArrowRight size={16} color="#E1E0CC" />
-              </span>
-            </motion.button>
-          </Magnetic>
-        </motion.form>
-        {submitted && (
-          <p className="text-primary/70 text-xs mt-4">
-            Thanks — we'll be in touch.
-          </p>
-        )}
+          {/* Right — form card */}
+          <div className="p-8 md:p-12">
+            <h3 className="text-primary text-lg font-medium mb-1">Request access</h3>
+            <p className="text-gray-600 text-xs mb-6">For compliance officers at RBI-regulated lenders</p>
 
-        <p className="text-gray-600 text-xs mt-6">
-          or reach us directly at{' '}
-          <a href="mailto:hello@undark.in" className="text-primary/50 hover:text-primary/80 transition-colors duration-200">
-            hello@undark.in
-          </a>
-        </p>
-
+            {submitted ? (
+              <motion.div
+                className="flex flex-col items-center justify-center h-48 gap-3 text-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+              >
+                <div className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center text-primary text-lg">✓</div>
+                <p className="text-primary font-medium">Thanks — we'll be in touch.</p>
+                <p className="text-gray-600 text-xs">hello@undark.in</p>
+              </motion.div>
+            ) : (
+              <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  required
+                  placeholder="Full name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className={inputClass}
+                  style={inputStyle}
+                />
+                <input
+                  type="email"
+                  required
+                  placeholder="Work email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className={inputClass}
+                  style={inputStyle}
+                />
+                <input
+                  type="text"
+                  required
+                  placeholder="NBFC / MFI name"
+                  value={form.company}
+                  onChange={(e) => setForm({ ...form, company: e.target.value })}
+                  className={inputClass}
+                  style={inputStyle}
+                />
+                <Magnetic strength={0.2} className="mt-1">
+                  <motion.button
+                    type="submit"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group w-full inline-flex items-center justify-between rounded-xl pl-5 pr-2 py-3 text-primary font-medium text-sm transition-all border border-primary/25 hover:border-primary/50"
+                    style={{ backdropFilter: 'saturate(180%) blur(12px)', backgroundColor: 'rgba(225,224,204,0.08)' }}
+                  >
+                    Request access
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg border border-primary/20 bg-primary/10 transition-transform group-hover:scale-110">
+                      <ArrowRight size={15} color="#E1E0CC" />
+                    </span>
+                  </motion.button>
+                </Magnetic>
+                <p className="text-gray-700 text-[10px] text-center mt-1">
+                  hello@undark.in · we only use your details to coordinate onboarding
+                </p>
+              </form>
+            )}
+          </div>
+        </div>
       </div>
+      </motion.div>
     </section>
   )
 }

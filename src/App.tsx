@@ -1,4 +1,5 @@
 import Hero from './sections/Hero'
+import ProductPreview from './sections/ProductPreview'
 import Problem from './sections/Problem'
 import HowItWorks from './sections/HowItWorks'
 import WhyNow from './sections/WhyNow'
@@ -6,6 +7,7 @@ import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 import { ScrollProgress } from './components/ScrollProgress'
 import { Cursor } from './components/Cursor'
+import { StatsTicker } from './components/StatsTicker'
 import { useAnimatedFavicon } from './hooks/useAnimatedFavicon'
 
 function Divider() {
@@ -24,6 +26,8 @@ export default function App() {
       <Cursor />
       <ScrollProgress />
       <Hero />
+      <StatsTicker />
+      <ProductPreview />
       <Divider />
       <Problem />
       <Divider />

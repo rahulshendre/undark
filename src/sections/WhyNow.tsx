@@ -3,16 +3,16 @@ import { WordsPullUp } from '../components/TextAnimations'
 
 const CARDS = [
   {
-    title: 'MFI stress at a 7-year high',
-    body: 'Gross NPA at 16% as of March 2025, up from 8.8% a year prior. Lenders are losing money they have no mechanism to recover.',
+    title: 'RBI Draft Directions — Oct 2026',
+    body: 'Every contact becomes an auditable event across nine RE categories upon notification. Recorded calls, 8am–7pm hours, identity disclosure, authorization letters on every visit, public agency lists. The mandate already exists — the draft is the accelerant.',
   },
   {
-    title: 'Human infrastructure is broken',
-    body: "Certified recovery agents don't exist in Tier-3/4/5 cities. The NBFC industry body is lobbying RBI to ease requirements because the people aren't there.",
+    title: 'Lender liability is current law',
+    body: 'Rs.2.5 Cr penalty on Bajaj Finance for agent harassment (2021). Rs.1.86 Cr on CSB Bank for outsourcing governance lapses (2024). 62 NBFCs penalised in 2023–25. The lender is liable for every agent\'s conduct — today.',
   },
   {
-    title: 'Zero funded tech players here',
-    body: 'Credgenics, DPDzero, Riverline — all built for digital-first Tier-1 borrowers. Sub-Rs.1L MFI borrowers in cash-economy India have nobody.',
+    title: 'No neutral rail exists',
+    body: 'A platform auditing its own contacts is self-certification. An agent\'s conduct history must travel across agencies and platforms. Only a neutral party can hold it. Incumbents are disqualified by what they are.',
   },
 ]
 
@@ -24,7 +24,7 @@ export default function WhyNow() {
           Why now
         </p>
         <WordsPullUp
-          text="The infrastructure for small-ticket recovery doesn't exist. We're building it."
+          text="The credential stack digitizes exactly once. The first neutral rail in place becomes the standard."
           className="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight max-w-3xl mx-auto"
           style={{ color: '#E1E0CC' }}
         />

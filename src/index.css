@@ -56,3 +56,27 @@ body {
 .bg-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='bgNoiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23bgNoiseFilter)'/%3E%3C/svg%3E");
 }
+
+@property --shimmer-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes nav-shimmer {
+  to { --shimmer-angle: 360deg; }
+}
+
+.nav-shimmer-border {
+  --shimmer-angle: 0deg;
+  background: conic-gradient(
+    from var(--shimmer-angle),
+    rgba(225, 224, 204, 0.07) 0%,
+    rgba(225, 224, 204, 0.07) 38%,
+    rgba(225, 224, 204, 0.45) 48%,
+    rgba(225, 224, 204, 0.45) 52%,
+    rgba(225, 224, 204, 0.07) 62%,
+    rgba(225, 224, 204, 0.07) 100%
+  );
+  animation: nav-shimmer 5s linear infinite;
+}
