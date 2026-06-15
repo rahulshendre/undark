@@ -35,16 +35,16 @@ function CountUp({ to, duration = 1.8, prefix = '', suffix = '', separator = tru
 
 const STATS = [
   {
-    render: () => <><CountUp to={62} separator={false} /></>,
-    label: 'NBFCs penalised 2023–25 for outsourced-agent conduct failures',
+    render: () => <>Rs.4–5K Cr</>,
+    label: 'written off yearly, sub-Rs.1L unsecured loans',
   },
   {
-    render: () => <><CountUp to={103} separator={false} />%</>,
-    label: 'frontline recovery-agent attrition — credentials re-verified from scratch every job change',
+    render: () => <><CountUp to={16} separator={false} />%</>,
+    label: 'MFI gross NPA, March 2025',
   },
   {
-    render: () => <>4,<CountUp to={600} separator={false} />+</>,
-    label: 'agents for one NBFC across 100+ agencies, with no proof of visits on file',
+    render: () => <>Rs.480–850</>,
+    label: 'cost per field visit against a Rs.10K loan — the math does not work',
   },
 ]
 
@@ -61,8 +61,8 @@ export default function Problem() {
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-3xl mx-auto leading-[0.95] sm:leading-[0.9]"
           style={{ color: '#E1E0CC' }}
           segments={[
-            { text: "An agent's legal right to work is a stack of credentials.", className: 'font-normal' },
-            { text: 'Today that entire stack is paper.', className: 'italic font-serif' },
+            { text: 'Nobody starts from the one constraint that actually matters.', className: 'font-normal' },
+            { text: 'The cost per contact has to be lower than the loan value.', className: 'italic font-serif' },
           ]}
         />
 
@@ -87,7 +87,7 @@ export default function Problem() {
         <AnimatedParagraph
           className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-14 md:mt-20"
           style={{ color: '#DEDBC8' }}
-          text="Every recovery agent must hold IIBF DRA certification — sole certifier, RBI mandate. The lender is liable for every agent's conduct: Rs.2.5 Cr penalty on Bajaj Finance (2021), Rs.1.86 Cr on CSB Bank (2024). RBI's draft directions add per-contact duties by Oct 2026: recorded calls, identity disclosure, authorization letters on every visit. Yet certificates sit in drawers, authorizations travel as WhatsApp forwards, and borrowers cannot verify who is at their door."
+          text="India's MFIs and small NBFCs disburse crores of small-ticket loans every year — averaging Rs.10,000 to Rs.75,000 — to borrowers across Tier-2 and Tier-3 India. When these go bad there is no real recovery option. Field agents cost more per visit than the loan is worth, and digital channels stop working once a borrower crosses 90 days. So the loan gets written off, at scale, quietly, every month. Rs.4,000–5,000 Cr in annual write-offs surprises no one in the space. It is treated as acceptable loss because there is no better answer."
         />
       </div>
     </section>

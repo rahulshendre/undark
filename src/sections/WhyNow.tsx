@@ -3,16 +3,16 @@ import { WordsPullUp } from '../components/TextAnimations'
 
 const CARDS = [
   {
-    title: 'RBI Draft Directions — Oct 2026',
-    body: 'Every contact becomes an auditable event across nine RE categories upon notification. Recorded calls, 8am–7pm hours, identity disclosure, authorization letters on every visit, public agency lists. The mandate already exists — the draft is the accelerant.',
+    title: 'Zero funded tech players in this segment',
+    body: 'Credgenics, DPDzero, and Riverline serve digital-first or larger-ticket borrowers. Nobody has built for sub-Rs.1L NPA at MFI scale. The gap is not an oversight — it is a hard constraint nobody has solved.',
   },
   {
-    title: 'Lender liability is current law',
-    body: 'Rs.2.5 Cr penalty on Bajaj Finance for agent harassment (2021). Rs.1.86 Cr on CSB Bank for outsourcing governance lapses (2024). 62 NBFCs penalised in 2023–25. The lender is liable for every agent\'s conduct — today.',
+    title: 'The gig model already failed',
+    body: "Cgreen tried sub-Rs.1L recovery with a gig-agent model and no intelligence layer. 78% headcount decline year-on-year. The unit economics don't work without smarter routing. That is the problem we solve.",
   },
   {
-    title: 'No neutral rail exists',
-    body: 'A platform auditing its own contacts is self-certification. An agent\'s conduct history must travel across agencies and platforms. Only a neutral party can hold it. Incumbents are disqualified by what they are.',
+    title: 'Countercyclical',
+    body: 'As MFI stress rises, the product gets more valuable. 16% gross NPA and climbing. The worse the portfolio quality, the more lenders need an economically viable recovery path for accounts they currently write off.',
   },
 ]
 
@@ -24,7 +24,7 @@ export default function WhyNow() {
           Why now
         </p>
         <WordsPullUp
-          text="The credential stack digitizes exactly once. The first neutral rail in place becomes the standard."
+          text="The gap is real. The timing is right. And the product gets more valuable as the stress rises."
           className="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight max-w-3xl mx-auto"
           style={{ color: '#E1E0CC' }}
         />

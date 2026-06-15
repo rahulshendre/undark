@@ -1,40 +1,40 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, Check, IdCard, ShieldCheck, QrCode } from 'lucide-react'
+import { ArrowRight, Check, Target, Mic, Navigation } from 'lucide-react'
 import { WordsPullUpMultiStyle } from '../components/TextAnimations'
 
 const CARDS = [
   {
     number: '01',
-    title: 'Agent Passport.',
-    icon: IdCard,
+    title: 'Intent Scoring.',
+    icon: Target,
     items: [
-      'Live DRA certification status — sole certifier, RBI mandate',
-      'Background verification and agency empanelment on one credential',
-      'Assignment inbox replaces the paper authorization letter',
-      'Portable conduct history across employers — defense against false allegations',
+      'Score each borrower on recovery probability before any contact',
+      'Signals: IVR response, connection patterns, payment timing, language',
+      'Route to the right channel — cheap contacts for likely payers',
+      'Field visits only where they convert',
     ],
   },
   {
     number: '02',
-    title: 'Compliant Contact Mode.',
-    icon: ShieldCheck,
+    title: 'AI Voice Outreach.',
+    icon: Mic,
     items: [
-      'Enforces 8am–7pm hours, identity disclosure, and recording automatically',
-      'Cross-vendor contact frequency caps per account',
-      'One tamper-evident, account-level trail per lender',
-      'Indian-language screening for coercive conduct',
+      "Contextual calls in the borrower's language, not a generic IVR blast",
+      'Carries full history of prior interactions into every call',
+      'Rs.12–25 per resolved contact against Rs.480–850 per field visit',
+      'On a Rs.10K loan, 8–10 attempts cost Rs.100–200. The math works.',
     ],
   },
   {
     number: '03',
-    title: 'Borrower Verification.',
-    icon: QrCode,
+    title: 'Field Dispatch.',
+    icon: Navigation,
     items: [
-      'Borrower scans agent QR — no app, no data collected',
-      'Confirms: certified, authorized by this lender, valid today',
-      'Real-time protection against fake and unauthorized agents',
-      'Works offline — tamper-evident QR per assignment',
+      'For accounts that genuinely need a visit, the agent knows when to go',
+      'Arrives knowing what was already tried and what works for this borrower',
+      'Blind visits become targeted ones',
+      "Every interaction feeds the model — India's most predictive sub-Rs.1L dataset",
     ],
   },
 ]
@@ -141,11 +141,11 @@ export default function HowItWorks() {
           className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-12 md:mb-20"
           segments={[
             {
-              text: 'A three-sided network. ',
+              text: 'An AI layer on top of existing infrastructure. ',
               className: 'text-primary block',
             },
             {
-              text: 'Agents carry it. Borrowers verify against it. Lenders pay for it.',
+              text: 'No replacement of dialers, agents, or field teams. Each contact smarter and cheaper.',
               className: 'text-gray-500 block',
             },
           ]}

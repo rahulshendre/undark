@@ -1,10 +1,10 @@
 const ITEMS = [
-  'Mandatory · IIBF DRA certification per agent — sole certifier, RBI mandate',
-  '+47% / 103% · Recovery-agent growth in 5 months; BFSI frontline attrition',
-  '100+ agencies · One NBFC, 4,600+ agents, no proof of visits on file',
-  'Oct 2026 · Proposed effective date, RBI Draft Recovery-Conduct Directions',
-  'Rs.2.5 Cr · Bajaj Finance penalty for agent harassment, 2021',
-  '62 NBFCs · Penalised 2023–25 for outsourced-agent conduct failures',
+  'Rs.4,000–5,000 Cr · Written off yearly, sub-Rs.1L unsecured loans',
+  '16% · MFI gross NPA, March 2025',
+  'Rs.480–850 · Cost per field visit vs Rs.10K loan — economics broken at unit level',
+  '0 · Funded tech players in the sub-Rs.1L NPA segment',
+  'Rs.12–25 · AI voice outreach cost per resolved contact',
+  '90 DPD · Digital-only recovery fails past this point — field still needed, but smarter',
 ]
 
 export function StatsTicker() {

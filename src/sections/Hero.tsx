@@ -138,7 +138,7 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8, ease: EASE }}
               >
-                The work-authorization rail for debt recovery. Every agent verified, every contact provable. Lender compliance, automatic.
+                AI recovery infrastructure for sub-Rs.1L loans. Smarter contacts, lower cost. The math finally works.
               </motion.p>
               <motion.div
                 className="w-fit"
