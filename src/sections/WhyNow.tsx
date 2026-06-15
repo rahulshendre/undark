@@ -4,11 +4,11 @@ import { WordsPullUp } from '../components/TextAnimations'
 const CARDS = [
   {
     title: 'Zero funded tech players in this segment',
-    body: 'Credgenics, DPDzero, and Riverline serve digital-first or larger-ticket borrowers. Nobody has built for sub-Rs.1L NPA at MFI scale. The gap is not an oversight — it is a hard constraint nobody has solved.',
+    body: 'Existing recovery tools serve digital-first or larger-ticket borrowers. Nobody has built for sub-Rs.1L NPA at MFI scale. The gap is not an oversight — it is a hard constraint nobody has solved.',
   },
   {
     title: 'The gig model already failed',
-    body: "Cgreen tried sub-Rs.1L recovery with a gig-agent model and no intelligence layer. 78% headcount decline year-on-year. The unit economics don't work without smarter routing. That is the problem we solve.",
+    body: "Prior attempts used gig-agent models with no intelligence layer — 78% headcount decline year-on-year. Unit economics don't work without smarter routing. That is the problem we solve.",
   },
   {
     title: 'Countercyclical',
