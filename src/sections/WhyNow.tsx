@@ -3,16 +3,16 @@ import { WordsPullUp } from '../components/TextAnimations'
 
 const CARDS = [
   {
-    title: 'Zero funded tech players in this segment',
-    body: 'Existing recovery tools serve digital-first or larger-ticket borrowers. Nobody has built for sub-Rs.1L NPA at MFI scale. The gap is not an oversight — it is a hard constraint nobody has solved.',
+    title: 'Everyone builds for the lender',
+    body: 'Enterprise recovery software manages millions of borrowers for banks and large NBFCs. The practitioner actually working the file — the small agency, the boutique firm, the independent expert — has no tool built for them. That is the gap.',
   },
   {
-    title: 'The gig model already failed',
-    body: "Prior attempts used gig-agent models with no intelligence layer — 78% headcount decline year-on-year. Unit economics don't work without smarter routing. That is the problem we solve.",
+    title: 'The moat is captured expertise',
+    body: "Undark doesn't ask the model to know the law. It captures how real practitioners work — forums, what a notice must contain, what each step needs — structures it, and grounds every answer in it. Knowledge first, model second. Hard to copy, because the knowledge is the product.",
   },
   {
-    title: 'Countercyclical',
-    body: 'As MFI stress rises, the product gets more valuable. 16% gross NPA and climbing. The worse the portfolio quality, the more lenders need an economically viable recovery path for accounts they currently write off.',
+    title: 'Reliable enough to trust',
+    body: 'A model can now read a stack of mixed scans, statements, and chat exports without making things up — and deterministic retrieval keeps it honest. No invented sections, no invented RBI rules, confidence that drops when evidence is thin. The boring work is finally safe to automate.',
   },
 ]
 
@@ -24,7 +24,7 @@ export default function WhyNow() {
           Why now
         </p>
         <WordsPullUp
-          text="The gap is real. The timing is right. And the product gets more valuable as the stress rises."
+          text="The model is finally good enough to read a messy case file. Nobody has pointed it at the practitioner."
           className="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight max-w-3xl mx-auto"
           style={{ color: '#E1E0CC' }}
         />

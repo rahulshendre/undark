@@ -6,9 +6,9 @@ import { Magnetic } from '../components/Magnetic'
 const EASE = [0.16, 1, 0.3, 1] as const
 
 const VALUE_PROPS = [
-  { label: 'Pilot partner', sub: 'First 3–5 lenders only' },
-  { label: 'Agent side free', sub: 'Network compounds on its own' },
-  { label: 'One-click audit', sub: 'Inspection answers in minutes' },
+  { label: 'Pilot partner', sub: 'First few practices only' },
+  { label: 'Your cases, private', sub: 'Runs local — zero cloud needed' },
+  { label: 'Under a minute', sub: 'Case understood, not just stored' },
 ]
 
 // Replace with your Formspree form ID from formspree.io
@@ -67,10 +67,10 @@ export default function Contact() {
             <div>
               <p className="text-primary/50 text-[10px] tracking-widest uppercase mb-5">Get in touch</p>
               <h2 className="text-primary text-2xl md:text-3xl lg:text-4xl font-normal leading-tight mb-4">
-                Pilot the rail with one lender's agencies.
+                Put Undark in front of a real case.
               </h2>
               <p className="text-gray-500 text-sm leading-relaxed">
-                If you run compliance or collections at an RBI-regulated lender and agent-conduct liability is a live problem, we want to talk. Via IIMA Ventures network.
+                If you run a recovery practice, a boutique legal-recovery firm, or a small agency working sub-₹1 lakh files, we want a handful of pilot partners to run it on real cases. Via the IIMA Ventures network.
               </p>
             </div>
 
@@ -91,7 +91,7 @@ export default function Contact() {
           {/* Right — form card */}
           <div className="p-8 md:p-12">
             <h3 className="text-primary text-lg font-medium mb-1">Request access</h3>
-            <p className="text-gray-600 text-xs mb-6">For compliance officers at RBI-regulated lenders</p>
+            <p className="text-gray-600 text-xs mb-6">For recovery practitioners and small agencies</p>
 
             {submitted ? (
               <motion.div
@@ -126,7 +126,7 @@ export default function Contact() {
                 <input
                   type="text"
                   required
-                  placeholder="NBFC / MFI name"
+                  placeholder="Firm / practice name"
                   value={form.company}
                   onChange={(e) => setForm({ ...form, company: e.target.value })}
                   className={inputClass}
