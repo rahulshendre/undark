@@ -1,10 +1,11 @@
 const ITEMS = [
-  'Rs.4,000–5,000 Cr · Written off yearly, sub-Rs.1L unsecured loans',
-  '16% · MFI gross NPA, March 2025',
-  'Rs.480–850 · Cost per field visit vs Rs.10K loan — economics broken at unit level',
-  '0 · Funded tech players in the sub-Rs.1L NPA segment',
-  'Rs.12–25 · AI voice outreach cost per resolved contact',
-  '90 DPD · Digital-only recovery fails past this point — field still needed, but smarter',
+  '20–40 min · Spent rebuilding a single case by hand before work even starts',
+  '8+ sources · Loan agreement, notices, bank statements, WhatsApp, Excel, call logs',
+  '< 1 min · To reconstruct the same case as a clean workspace',
+  '≈₹3.25 lakh Cr · Microfinance loans outstanding, Q4 FY26 — the small-ticket pool defaults come from (MFIN)',
+  '4.06 Cr · Cases settled at National Lok Adalat in a single day, 14 Mar 2026 (NALSA)',
+  '3× · Cases an experienced practitioner can work in a day',
+  '0 · Funded tools built for the practitioner, not the lender',
 ]
 
 export function StatsTicker() {

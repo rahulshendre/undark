@@ -1,40 +1,40 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowRight, Check, Target, Mic, Navigation } from 'lucide-react'
+import { ArrowRight, Check, Upload, ScanText, Gavel } from 'lucide-react'
 import { WordsPullUpMultiStyle } from '../components/TextAnimations'
 
 const CARDS = [
   {
     number: '01',
-    title: 'Intent Scoring.',
-    icon: Target,
+    title: 'Upload everything.',
+    icon: Upload,
     items: [
-      'Score each borrower on recovery probability before any contact',
-      'Signals: IVR response, connection patterns, payment timing, language',
-      'Route to the right channel — cheap contacts for likely payers',
-      'Field visits only where they convert',
+      'Drop the whole pile — PDFs, scans, bank statements, notices, WhatsApp exports, call logs',
+      'OCR reads the scans, pdf-parse reads the rest — all server-side, never in the browser',
+      'No tagging, no forms, no folder structure to learn first',
+      'Sensitive data handled with care — document contents are never logged',
     ],
   },
   {
     number: '02',
-    title: 'AI Voice Outreach.',
-    icon: Mic,
+    title: 'Reconstruct the case.',
+    icon: ScanText,
     items: [
-      "Contextual calls in the borrower's language, not a generic IVR blast",
-      'Carries full history of prior interactions into every call',
-      'Rs.12–25 per resolved contact against Rs.480–850 per field visit',
-      'On a Rs.10K loan, 8–10 attempts cost Rs.100–200. The math works.',
+      'Facts pulled straight from the documents — borrower, outstanding, DPD, security, last payment',
+      "An analyst's read on top: clean timeline, missing documents, risks, and compliance gates",
+      'Every claim grounded in a sourced knowledge base, not the model’s memory',
+      'Honest nulls and stated confidence — it tells you what it could not find',
     ],
   },
   {
     number: '03',
-    title: 'Field Dispatch.',
-    icon: Navigation,
+    title: 'Work the case.',
+    icon: Gavel,
     items: [
-      'For accounts that genuinely need a visit, the agent knows when to go',
-      'Arrives knowing what was already tried and what works for this borrower',
-      'Blind visits become targeted ones',
-      "Every interaction feeds the model — India's most predictive sub-Rs.1L dataset",
+      'One workspace: summary, timeline, risks, compliance, and the recommended next move',
+      'Right forum surfaced — Lok Adalat, Section 138 NI Act, Summary Suit, SARFAESI, DRT',
+      'An editable notice drafted from a template — you review, you send. Never auto-sent.',
+      'Understand a case in under a minute instead of thirty',
     ],
   },
 ]
@@ -141,11 +141,11 @@ export default function HowItWorks() {
           className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal mb-12 md:mb-20"
           segments={[
             {
-              text: 'An AI layer on top of existing infrastructure. ',
+              text: 'Undark does the boring half. ',
               className: 'text-primary block',
             },
             {
-              text: 'No replacement of dialers, agents, or field teams. Each contact smarter and cheaper.',
+              text: 'It reconstructs the case so the practitioner starts where judgment begins — and never replaces it.',
               className: 'text-gray-500 block',
             },
           ]}

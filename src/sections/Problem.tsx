@@ -35,16 +35,16 @@ function CountUp({ to, duration = 1.8, prefix = '', suffix = '', separator = tru
 
 const STATS = [
   {
-    render: () => <>Rs.4–5K Cr</>,
-    label: 'written off yearly, sub-Rs.1L unsecured loans',
+    render: () => <>20–40<span className="text-2xl"> min</span></>,
+    label: 'to understand a single case before any real work can begin',
   },
   {
-    render: () => <><CountUp to={16} separator={false} />%</>,
-    label: 'MFI gross NPA, March 2025',
+    render: () => <><CountUp to={8} separator={false} />+</>,
+    label: 'places the file is scattered — PDFs, notices, statements, WhatsApp, Excel, call logs',
   },
   {
-    render: () => <>Rs.480–850</>,
-    label: 'cost per field visit against a Rs.10K loan — the math does not work',
+    render: () => <>{'<'}1<span className="text-2xl"> min</span></>,
+    label: 'to rebuild the same case as a clean, evidenced workspace in Undark',
   },
 ]
 
@@ -61,8 +61,8 @@ export default function Problem() {
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-3xl mx-auto leading-[0.95] sm:leading-[0.9]"
           style={{ color: '#E1E0CC' }}
           segments={[
-            { text: 'Nobody starts from the one constraint that actually matters.', className: 'font-normal' },
-            { text: 'The cost per contact has to be lower than the loan value.', className: 'italic font-serif' },
+            { text: 'Before an expert can think about a case, they spend half an hour rebuilding it by hand.', className: 'font-normal' },
+            { text: 'The bottleneck was never judgment. It is everything before judgment.', className: 'italic font-serif' },
           ]}
         />
 
@@ -87,7 +87,7 @@ export default function Problem() {
         <AnimatedParagraph
           className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-14 md:mt-20"
           style={{ color: '#DEDBC8' }}
-          text="India's MFIs and small NBFCs disburse crores of small-ticket loans every year — averaging Rs.10,000 to Rs.75,000 — to borrowers across Tier-2 and Tier-3 India. When these go bad there is no real recovery option. Field agents cost more per visit than the loan is worth, and digital channels stop working once a borrower crosses 90 days. So the loan gets written off, at scale, quietly, every month. Rs.4,000–5,000 Cr in annual write-offs surprises no one in the space. It is treated as acceptable loss because there is no better answer."
+          text="An experienced recovery practitioner already knows the law and the forums. What slows them down is mechanical. The loan agreement sits in one PDF, the notices in another, a bank statement somewhere else, a WhatsApp export, an Excel sheet of call attempts, scribbled borrower notes, a stack of scans. Before any judgment, they reconstruct the case by hand — every morning, every file, twenty to forty minutes a time. That reconstruction is the bottleneck. It does not need intelligence. It needs to disappear."
         />
       </div>
     </section>

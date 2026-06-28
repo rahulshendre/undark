@@ -138,7 +138,7 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8, ease: EASE }}
               >
-                AI recovery infrastructure for sub-Rs.1L loans. Smarter contacts, lower cost. The math finally works.
+                Upload the messy case file. Read it back as a clean workspace in under a minute — timeline, risks, compliance, the next move. The boring half, done before you start thinking.
               </motion.p>
               <motion.div
                 className="w-fit"

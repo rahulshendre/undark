@@ -1,66 +1,121 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShieldCheck, IdCard, QrCode, CheckCircle2, Clock, AlertCircle } from 'lucide-react'
+import { Scale, Wallet, Gauge, AlertTriangle, ShieldCheck, ShieldAlert, Clock } from 'lucide-react'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
-const AGENTS = [
+type Sig = 'normal' | 'important' | 'critical'
+type Compliance = 'ok' | 'attention' | 'violation'
+
+const CASES = [
   {
-    id: 'DRA-2241',
-    name: 'Arjun Mehta',
-    agency: 'Credforce Recoveries',
-    cert: 'IIBF DRA Certified',
-    certExpiry: 'Valid until Mar 2026',
-    status: 'active',
-    statusLabel: 'On assignment',
-    assignments: 3,
-    log: [
-      { time: '10:42', text: 'Contact initiated · Borrower verified QR · Identity disclosed', type: 'success' },
-      { time: '09:15', text: 'Assignment accepted · Axis NBFC · Account #AX-8821', type: 'success' },
-      { time: 'Yesterday', text: 'Contact completed · Call recorded · Within hours', type: 'success' },
+    id: 'BFL-7741',
+    borrower: 'Sunita Devi',
+    lender: 'Bharat Financial · NBFC-MFI',
+    state: 'Bihar',
+    outstanding: '₹38,000',
+    loanType: 'Personal · unsecured',
+    stage: '142 DPD',
+    lastPayment: 'Last paid ₹2,400 · 5 months ago',
+    confidence: 'high' as const,
+    summary: 'Two notices sent, no response in 5 months. Clean pre-litigation Lok Adalat candidate.',
+    forum: 'Pre-litigation Lok Adalat',
+    forumMeta: '~₹22K–28K settlement · ~45 days',
+    timeline: [
+      { time: '12 Aug 2025', text: 'Loan disbursed · ₹50,000 principal', sig: 'normal' as Sig },
+      { time: '03 Nov 2025', text: 'Last payment received · ₹2,400', sig: 'important' as Sig },
+      { time: '20 Jan 2026', text: 'First demand notice sent', sig: 'important' as Sig },
+      { time: '15 Mar 2026', text: 'Second notice — no response', sig: 'critical' as Sig },
+    ],
+    risks: [
+      { text: 'No contact in 5 months — borrower may have relocated', sig: 'important' as Sig },
+    ],
+    compliance: [
+      { rule: 'RBI Fair Practice Code — written intimation', status: 'ok' as Compliance },
+      { rule: 'Contact hours logged within 8 AM–7 PM', status: 'ok' as Compliance },
     ],
   },
   {
-    id: 'DRA-1887',
-    name: 'Priya Nair',
-    agency: 'Suraksha Field Services',
-    cert: 'IIBF DRA Certified',
-    certExpiry: 'Valid until Aug 2026',
-    status: 'verified',
-    statusLabel: 'Available',
-    assignments: 1,
-    log: [
-      { time: '11:00', text: 'New assignment received · Muthoot Finance · Account #MT-3304', type: 'success' },
-      { time: '10:30', text: 'Background check refreshed · Cleared', type: 'success' },
-      { time: '2 days ago', text: 'Contact completed · Borrower confirmed payment intent', type: 'success' },
+    id: 'AX-8821',
+    borrower: 'Mohammed Irfan',
+    lender: 'Axis-backed NBFC',
+    state: 'Maharashtra',
+    outstanding: '₹64,500',
+    loanType: 'Business · unsecured',
+    stage: '96 DPD',
+    lastPayment: 'EMI cheque returned twice',
+    confidence: 'medium' as const,
+    summary: 'Two bounced cheques. Section 138 route open — but the 30-day clock is running.',
+    forum: 'Section 138 NI Act notice',
+    forumMeta: '~₹50K–60K settlement · ~90 days',
+    timeline: [
+      { time: '01 Sep 2025', text: 'Loan disbursed', sig: 'normal' as Sig },
+      { time: '10 Feb 2026', text: "Cheque returned · 'insufficient funds'", sig: 'critical' as Sig },
+      { time: '05 Mar 2026', text: 'Second cheque returned', sig: 'critical' as Sig },
+    ],
+    risks: [
+      { text: '138 limitation: 30-day notice window from bank memo', sig: 'critical' as Sig },
+    ],
+    compliance: [
+      { rule: 'Cooling-off period observed', status: 'ok' as Compliance },
+      { rule: 'Bank return memo (2nd cheque) — not on file', status: 'attention' as Compliance },
     ],
   },
   {
-    id: 'DRA-3312',
-    name: 'Ravi Sharma',
-    agency: 'FastTrack Collections',
-    cert: 'Cert renewal pending',
-    certExpiry: 'Expired 12 Jan 2026',
-    status: 'blocked',
-    statusLabel: 'Blocked',
-    assignments: 0,
-    log: [
-      { time: 'Today', text: 'Assignment attempt blocked · DRA certification expired', type: 'error' },
-      { time: '3 days ago', text: 'Renewal reminder sent · IIBF portal link shared', type: 'warn' },
-      { time: '5 days ago', text: 'Cert expiry flagged by system · Lender notified', type: 'warn' },
+    id: 'MT-3304',
+    borrower: 'Lakshmi R',
+    lender: 'Muthoot-type NBFC',
+    state: 'Tamil Nadu',
+    outstanding: '₹19,200',
+    loanType: 'Personal · unsecured',
+    stage: '71 DPD',
+    lastPayment: 'Partial paid ₹3,000 · 6 weeks ago',
+    confidence: 'high' as const,
+    summary: 'Borrower responsive on WhatsApp. Direct settlement likely — no litigation needed.',
+    forum: 'Direct settlement offer',
+    forumMeta: '~₹14K–16K settlement · ~15 days',
+    timeline: [
+      { time: '18 Oct 2025', text: 'Loan disbursed', sig: 'normal' as Sig },
+      { time: '02 Apr 2026', text: 'Partial payment · ₹3,000', sig: 'important' as Sig },
+      { time: '11 May 2026', text: 'Borrower asked about settlement (WhatsApp)', sig: 'important' as Sig },
+    ],
+    risks: [
+      { text: 'No red flags — documents consistent', sig: 'normal' as Sig },
+    ],
+    compliance: [
+      { rule: 'Calls logged after 7 PM on 3 occasions', status: 'violation' as Compliance },
+      { rule: 'Identity disclosed on every contact', status: 'ok' as Compliance },
     ],
   },
 ]
 
+const sigDot: Record<Sig, string> = {
+  normal: 'bg-gray-600',
+  important: 'bg-primary/70',
+  critical: 'bg-red-500/70',
+}
+
+const sigText: Record<Sig, string> = {
+  normal: 'text-gray-400',
+  important: 'text-gray-300',
+  critical: 'text-red-400/90',
+}
+
+const confBadge: Record<'high' | 'medium' | 'low', string> = {
+  high: 'border-green-500/30 text-green-400',
+  medium: 'border-yellow-500/30 text-yellow-400/80',
+  low: 'border-red-500/30 text-red-400/70',
+}
+
+const compMeta: Record<Compliance, { color: string; Icon: typeof ShieldCheck; label: string }> = {
+  ok: { color: 'text-green-500', Icon: ShieldCheck, label: 'OK' },
+  attention: { color: 'text-yellow-500', Icon: ShieldAlert, label: 'Attention' },
+  violation: { color: 'text-red-400', Icon: ShieldAlert, label: 'Violation' },
+}
+
 export default function ProductPreview() {
   const [selected, setSelected] = useState(0)
-  const agent = AGENTS[selected]
-
-  const statusBadge = agent.status === 'active'
-    ? 'border-green-500/30 text-green-400'
-    : agent.status === 'verified'
-    ? 'border-primary/20 text-primary/60'
-    : 'border-red-500/30 text-red-400/70'
+  const c = CASES[selected]
 
   return (
     <section className="bg-black px-4 md:px-6 pb-8">
@@ -84,21 +139,21 @@ export default function ProductPreview() {
             <div className="flex-1 flex justify-center">
               <div className="rounded-md px-4 py-1 text-[11px] text-gray-600 border border-white/[0.06]"
                 style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}>
-                app.undark.in/agents
+                app.undark.in/case/{c.id}
               </div>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[10px] text-gray-500">Live</span>
+              <span className="text-[10px] text-gray-500">Reconstructed</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3">
-            {/* sidebar */}
+            {/* sidebar — case list */}
             <div className="border-r border-white/[0.06] p-4 hidden md:block">
-              <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-3">Agent Registry</p>
+              <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-3">Cases</p>
               <div className="flex flex-col gap-1">
-                {AGENTS.map((a, i) => (
+                {CASES.map((a, i) => (
                   <button
                     key={a.id}
                     onClick={() => setSelected(i)}
@@ -109,25 +164,25 @@ export default function ProductPreview() {
                     }`}
                   >
                     <div>
-                      <p className="text-primary text-xs font-medium">{a.name}</p>
-                      <p className="text-gray-600 text-[10px]">{a.agency}</p>
+                      <p className="text-primary text-xs font-medium">{a.borrower}</p>
+                      <p className="text-gray-600 text-[10px]">{a.outstanding} · {a.stage}</p>
                     </div>
                     <div className={`w-1.5 h-1.5 rounded-full ${
-                      a.status === 'active' ? 'bg-green-500' :
-                      a.status === 'verified' ? 'bg-primary/60' : 'bg-red-500/60'
+                      a.confidence === 'high' ? 'bg-green-500' :
+                      a.confidence === 'medium' ? 'bg-yellow-500/70' : 'bg-red-500/60'
                     }`} />
                   </button>
                 ))}
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/[0.06]">
-                <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-2">This lender</p>
-                <p className="text-primary text-sm font-medium">847 agents</p>
-                <p className="text-gray-600 text-[10px]">across 12 agencies · 2 blocked</p>
+                <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-2">This practice</p>
+                <p className="text-primary text-sm font-medium">42 cases this month</p>
+                <p className="text-gray-600 text-[10px]">31 settled pre-litigation · avg setup 38s</p>
               </div>
             </div>
 
-            {/* main panel */}
+            {/* main panel — the workspace */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={selected}
@@ -138,71 +193,96 @@ export default function ProductPreview() {
                 transition={{ duration: 0.2 }}
               >
                 {/* header */}
-                <div className="flex items-start justify-between mb-5">
+                <div className="flex items-start justify-between mb-4">
                   <div>
-                    <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Agent Passport</p>
+                    <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-1">Case workspace</p>
                     <p className="text-primary text-base font-medium">
-                      {agent.name} <span className="text-gray-600 font-normal text-sm">· {agent.id}</span>
+                      {c.borrower} <span className="text-gray-600 font-normal text-sm">· {c.id}</span>
                     </p>
-                    <p className="text-gray-500 text-xs mt-0.5">{agent.agency}</p>
+                    <p className="text-gray-500 text-xs mt-0.5">{c.lender} · {c.state}</p>
                   </div>
-                  <span className={`text-[10px] border rounded-full px-2 py-0.5 ${statusBadge}`}>
-                    {agent.statusLabel}
+                  <span className={`text-[10px] border rounded-full px-2 py-0.5 capitalize ${confBadge[c.confidence]}`}>
+                    {c.confidence} confidence
                   </span>
                 </div>
 
-                {/* credential cards */}
+                {/* one-line analyst summary */}
+                <p className="text-primary/80 text-[13px] leading-relaxed mb-5 pl-3 border-l border-primary/20">
+                  {c.summary}
+                </p>
+
+                {/* fact cards */}
                 <div className="grid grid-cols-3 gap-3 mb-5">
                   <div className="rounded-xl p-3 border border-white/[0.07]" style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}>
                     <div className="flex items-center gap-1.5 mb-2">
-                      <IdCard size={12} className="text-gray-500" />
-                      <p className="text-[10px] text-gray-600 uppercase tracking-wider">Certification</p>
+                      <Wallet size={12} className="text-gray-500" />
+                      <p className="text-[10px] text-gray-600 uppercase tracking-wider">Outstanding</p>
                     </div>
-                    <p className={`text-xs font-medium ${agent.status === 'blocked' ? 'text-red-400' : 'text-primary'}`}>
-                      {agent.cert}
-                    </p>
-                    <p className="text-gray-600 text-[10px]">{agent.certExpiry}</p>
+                    <p className="text-primary text-xs font-medium">{c.outstanding}</p>
+                    <p className="text-gray-600 text-[10px]">{c.loanType}</p>
                   </div>
                   <div className="rounded-xl p-3 border border-white/[0.07]" style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}>
                     <div className="flex items-center gap-1.5 mb-2">
-                      <ShieldCheck size={12} className="text-gray-500" />
-                      <p className="text-[10px] text-gray-600 uppercase tracking-wider">Assignments</p>
+                      <Gauge size={12} className="text-gray-500" />
+                      <p className="text-[10px] text-gray-600 uppercase tracking-wider">Stage</p>
                     </div>
-                    <p className="text-primary text-xs font-medium">{agent.assignments} active</p>
-                    <p className="text-gray-600 text-[10px]">
-                      {agent.status === 'blocked' ? 'New assignments blocked' : 'Authorization letters issued'}
-                    </p>
+                    <p className="text-primary text-xs font-medium">{c.stage}</p>
+                    <p className="text-gray-600 text-[10px]">{c.lastPayment}</p>
                   </div>
                   <div className="rounded-xl p-3 border border-white/[0.07]" style={{ backgroundColor: 'rgba(255,255,255,0.03)' }}>
                     <div className="flex items-center gap-1.5 mb-2">
-                      <QrCode size={12} className="text-gray-500" />
-                      <p className="text-[10px] text-gray-600 uppercase tracking-wider">Borrower QR</p>
+                      <Scale size={12} className="text-gray-500" />
+                      <p className="text-[10px] text-gray-600 uppercase tracking-wider">Next move</p>
                     </div>
-                    <p className={`text-xs font-medium ${agent.status === 'blocked' ? 'text-red-400' : 'text-primary'}`}>
-                      {agent.status === 'blocked' ? 'Disabled' : 'Active'}
-                    </p>
-                    <p className="text-gray-600 text-[10px]">
-                      {agent.status === 'blocked' ? 'Cert required to activate' : 'Scan to verify identity'}
-                    </p>
+                    <p className="text-primary text-xs font-medium">{c.forum}</p>
+                    <p className="text-gray-600 text-[10px]">{c.forumMeta}</p>
                   </div>
                 </div>
 
-                {/* activity log */}
-                <div>
-                  <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-2">Activity log</p>
+                {/* timeline */}
+                <div className="mb-5">
+                  <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-2">Timeline</p>
                   <div className="flex flex-col gap-1.5">
-                    {agent.log.map((log, i) => (
+                    {c.timeline.map((t, i) => (
                       <div key={i} className="flex items-center gap-3 text-[11px]">
-                        {log.type === 'success'
-                          ? <CheckCircle2 size={12} className="text-green-500 shrink-0" />
-                          : log.type === 'error'
-                          ? <AlertCircle size={12} className="text-red-400 shrink-0" />
-                          : <Clock size={12} className="text-yellow-500 shrink-0" />
-                        }
-                        <span className="text-gray-600 w-16 shrink-0">{log.time}</span>
-                        <span className="text-gray-400">{log.text}</span>
+                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${sigDot[t.sig]}`} />
+                        <span className="text-gray-600 w-24 shrink-0">{t.time}</span>
+                        <span className={sigText[t.sig]}>{t.text}</span>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                {/* risks | compliance — deliberately separate */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-2">Risks</p>
+                    <div className="flex flex-col gap-1.5">
+                      {c.risks.map((r, i) => (
+                        <div key={i} className="flex items-start gap-2 text-[11px]">
+                          <AlertTriangle size={12} className={`shrink-0 mt-px ${r.sig === 'critical' ? 'text-red-400' : r.sig === 'important' ? 'text-yellow-500' : 'text-gray-600'}`} />
+                          <span className="text-gray-400">{r.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="sm:border-l border-white/[0.06] sm:pl-4">
+                    <p className="text-[10px] text-gray-600 uppercase tracking-widest mb-2">Compliance</p>
+                    <div className="flex flex-col gap-1.5">
+                      {c.compliance.map((f, i) => {
+                        const m = compMeta[f.status]
+                        return (
+                          <div key={i} className="flex items-start gap-2 text-[11px]">
+                            {f.status === 'ok'
+                              ? <ShieldCheck size={12} className={`shrink-0 mt-px ${m.color}`} />
+                              : f.status === 'attention'
+                              ? <Clock size={12} className={`shrink-0 mt-px ${m.color}`} />
+                              : <ShieldAlert size={12} className={`shrink-0 mt-px ${m.color}`} />}
+                            <span className="text-gray-400">{f.rule}</span>
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
                 </div>
               </motion.div>
